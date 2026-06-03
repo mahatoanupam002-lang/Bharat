@@ -50,6 +50,15 @@ export default function Lesson() {
         </section>
       ))}
 
+      {lesson.myth && (
+        <div style={S.mythBox}>
+          <div style={S.mythLabel}>{t("Myth", "भ्रम")}</div>
+          <div style={S.mythClaim}>{t(lesson.myth.claim.en, lesson.myth.claim.hi)}</div>
+          <div style={S.mythLabelTrue}>{t("Fact", "सच")}</div>
+          <div style={S.calloutText}>{t(lesson.myth.truth.en, lesson.myth.truth.hi)}</div>
+        </div>
+      )}
+
       <div style={S.callout}>
         <div style={S.calloutLabel}>{t("Key idea", "मुख्य विचार")}</div>
         <div style={S.calloutText}>{t(lesson.callout.en, lesson.callout.hi)}</div>
@@ -59,6 +68,21 @@ export default function Lesson() {
         <div style={S.doLabel}>{t("Try this", "यह करें")}</div>
         <div style={S.calloutText}>{t(lesson.doThis.en, lesson.doThis.hi)}</div>
       </div>
+
+      {lesson.sources && (
+        <section style={S.sourcesBox}>
+          <div style={S.sourcesLabel}>{t("Sources & further reading", "स्रोत व आगे पढ़ें")}</div>
+          <ul style={S.sourcesList}>
+            {lesson.sources.map((src, i) => (
+              <li key={i} style={S.sourcesItem}>
+                <a href={src.url} target="_blank" rel="noopener noreferrer" style={S.sourcesLink}>
+                  {t(src.label.en, src.label.hi)} ↗
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <button
         style={{ ...S.markBtn, ...(done ? S.markDone : {}) }}
